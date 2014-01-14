@@ -1,0 +1,8 @@
+output {
+  elasticsearch_http {
+    flush_size => <%= @output_elasticsearch_http_flush_size %>
+    host       => "<%= @output_elasticsearch_http_host %>"
+    #index      => "<%= @output_elasticsearch_http_index %>"
+    port       => <%= @output_elasticsearch_http_port %>
+  }
+}

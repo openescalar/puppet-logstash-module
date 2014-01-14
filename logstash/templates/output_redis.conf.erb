@@ -1,0 +1,7 @@
+output {
+  redis { 
+    host => <%= @output_redis_hosts %>
+    data_type => "list"
+    key => "logstash" 
+  }
+}

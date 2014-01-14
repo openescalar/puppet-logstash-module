@@ -1,0 +1,8 @@
+output {
+  lumberjack {
+    hosts           =>  <%= @output_lumberjack_hosts %>
+    port            => "<%= @output_lumberjack_port %>"
+    type            => "<%= @output_lumberjack_type %>"
+    ssl_certificate => "<%= @output_lumberjack_ssl_path %>/<%= @output_lumberjack_ssl_certificate %>"
+  }
+}

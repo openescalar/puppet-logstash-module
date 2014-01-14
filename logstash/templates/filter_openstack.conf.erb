@@ -1,0 +1,28 @@
+filter {
+  if [type] == "openstack" and [message] !~ "^$" {
+    mutate {
+      gsub => ["message", " {1,}", " "]
+    }
+    grok {
+      pattern => 
+        [
+         "%{DATESTAMP:timestamp} %{WORD:level} \[%{DATA:name}\] %{GREEDYDATA:message_remainder}",
+          "%{DATESTAMP:timestamp} %{POSINT:pid} %{WORD:level} %{DATA:name} (\[-\]|\[%{DATA:request} %{USER:user} %{USER:tenant}\]) %{GREEDYDATA:message_remainder}",
+          "%{DATESTAMP:timestamp} %{POSINT:pid} %{WORD:level} %{DATA:name} %{GREEDYDATA:message_remainder}",
+          "%{DATESTAMP:timestamp} %{WORD:level} %{DATA:name} %{GREEDYDATA:message_remainder}"
+        ]
+    }
+    if "_grokparsefailure" not in [tags] {
+      date {
+        match => ["timestamp","ISO8601","YYYY-MM-dd HH:mm:ss","YYYY-MM-dd HH:mm:ss.SSS"]
+      }
+      mutate {
+        replace => [ "@message", "%{message_remainder}" ]
+      }
+      mutate {
+        # remove bits no longer needed.
+        remove => [ "message_remainder","timestamp" ]
+      }
+    }
+  }  
+}

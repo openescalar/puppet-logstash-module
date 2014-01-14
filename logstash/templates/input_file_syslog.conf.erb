@@ -1,0 +1,8 @@
+input {
+  file {
+    type         => "<%= @input_file_syslog_type %>"
+    path         => <%= @input_file_syslog_path %>
+    tags         => <%= @input_file_syslog_tags %>    
+    sincedb_path => "<%= @input_file_syslog_sincedb_path %>"
+  }
+}

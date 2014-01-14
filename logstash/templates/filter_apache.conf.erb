@@ -1,0 +1,16 @@
+filter {
+  if [type] == "apache-access" {
+  if ! [processed] {
+      grok {
+        pattern   => ["%{COMBINEDAPACHELOG}"]
+      }
+      date {
+        match     => [ "timestamp", "dd/MMM/yyyy:HH:mm:ss Z", "dd/MMM/yyyy:HH:mm:ss" ]
+      }
+      geoip {
+        source    => "clientip"
+        add_field => ["processed","true"]
+      }
+    }
+  }
+}

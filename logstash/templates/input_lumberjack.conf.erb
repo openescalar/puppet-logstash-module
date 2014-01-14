@@ -1,0 +1,8 @@
+input {
+  lumberjack {
+    port            => "<%= @input_lumberjack_port %>"
+    type            => "<%= @input_lumberjack_type %>"
+    ssl_certificate => "<%= @input_lumberjack_ssl_path %>/<%= @input_lumberjack_ssl_certificate %>"
+    ssl_key         => "<%= @input_lumberjack_ssl_path %>/<%= @input_lumberjack_ssl_key %>"
+  }
+}

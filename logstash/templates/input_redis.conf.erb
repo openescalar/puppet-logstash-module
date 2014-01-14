@@ -1,0 +1,9 @@
+input {
+  redis { 
+    host 	  => "<%= @input_redis_host %>"
+    data_type => "list"
+    key 	  => "logstash"
+    type      => "redis-input"
+    threads   => <%= @input_redis_threads %>
+  }
+}

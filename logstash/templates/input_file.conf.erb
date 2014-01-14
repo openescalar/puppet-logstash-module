@@ -1,0 +1,9 @@
+input {
+  file {
+    type           => "<%= @input_file_type %>"
+    path           => <%= @input_file_path %>
+    tags           => <%= @input_file_tags %>    
+    sincedb_path   => "<%= @input_file_sincedb_path %>"
+    start_position => "<%= @input_file_start_position %>"
+  }
+}
